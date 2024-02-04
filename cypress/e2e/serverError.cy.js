@@ -11,6 +11,8 @@ describe('Server error', () => {
     ).as('serverError')
     cy.contains('button', 'Get TODO').click()
     cy.wait('@serverError')
+      .its('response.statusCode')
+      .should('be.equal', 500)
 
     cy.contains(
       '.error span',
